@@ -1,10 +1,15 @@
 import Cards from '../../components/Cards/Cards';
 import React, { useState } from 'react';
 import style from './Games.module.scss';
-import data from '../../data.json';
+import { useContext } from 'react';
+import { WordsContext } from '../../context/wordsContext';
 
 export default function Games() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+
+
+const {dataServer,setDataServer}=useContext(WordsContext);//достаем данные из wordsContext
+
+const [currentIndex, setCurrentIndex] = useState(0); //хук для индексов, чтобы можно было перелистывать карточки
     function goToPreviousCard() {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
@@ -12,7 +17,7 @@ export default function Games() {
     }
 
     function goToNextCard() {
-        if (currentIndex < data.length - 1) {
+        if (currentIndex < dataServer.length - 1) {
             setCurrentIndex(currentIndex + 1);
         }
     }
@@ -22,15 +27,15 @@ export default function Games() {
         setCount(learnedWords+1);
     }
 
-  return (
+return (
     <div className={style.wrapper}>
         <div className={style.cards}>
             <button onClick={goToPreviousCard} className={style.cards__button}>←</button>
                 <Cards
-                    key={data[currentIndex].id}
-                    english={data[currentIndex].english}
-                    transcription={data[currentIndex].transcription}
-                    russian={data[currentIndex].russian}
+                    key={dataServer[currentIndex].id}
+                    english={dataServer[currentIndex].english}
+                    transcription={dataServer[currentIndex].transcription}
+                    russian={dataServer[currentIndex].russian}
                     currentIndex={currentIndex}
                     setCurrentIndex={setCurrentIndex}
                     addWord={()=>addWord()}
@@ -39,5 +44,5 @@ export default function Games() {
             </div>
             <div className={style.cards__counter}>Изучено  {learnedWords}  слов </div>
             </div>
-  )
+    )
 }

@@ -1,0 +1,36 @@
+.table__line {
+  display: grid;
+  grid-template-columns: 0.2fr repeat(4, 0.6fr);
+  align-content: center;
+  background: rgba(224, 202, 170, 0.573);
+  border: 1px solid rgba(96, 129, 65, 0.7490196078);
+  border-radius: 10px;
+}
+.table__line .table__number {
+  color: black;
+}
+.table__line .table__english {
+  color: black;
+}
+.table__line .table__transcription {
+  color: black;
+}
+.table__line .table__russian {
+  color: black;
+}
+.table__line .table__buttons {
+  color: black;
+}
+
+button {
+  padding: 5px;
+  border: none;
+  text-decoration: none;
+  background: none;
+}
+
+button:hover {
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+}/*# sourceMappingURL=Line.module.css.map */
