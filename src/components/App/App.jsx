@@ -19,9 +19,6 @@ function App() {
             <Route path="*" element={<Error/>}></Route>
           </Routes>
         </main>
-        <footer>
-          <Footer/>
-        </footer>
       </div>
     </Router>
   );
