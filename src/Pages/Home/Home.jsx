@@ -1,5 +1,5 @@
 import style from "./Home.module.scss";
-//import data from "../../data.json";
+import AddWord from "../../components/AddWord/AddWord";
 import Line from "../../components/Line/Line";
 import { useState, useContext } from "react";
 import { WordsContext } from "../../context/wordsContext";
@@ -8,11 +8,9 @@ const Home = () => {
   //достаем данные из wordsContext
   const { dataServer, setDataServer } = useContext(WordsContext);
 
-  //const [items, setItems] = useState(dataServer); //добавляем хук для отрисовки нового списка после удаления и при отрисовке указываем массивом не data, a items
-
   const deleteItem = async (id) => {
     try {
-      await fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}/delete`, {
+      await fetch(`api/words/${id}/delete`, {
         method: "POST",
       }); //сходили в АПИ для удаления выбранного элемента
       const updatedList = dataServer.filter((item) => item.id !== id); //фильтр, в котором отрисовываем список без выбранного id
@@ -29,19 +27,26 @@ const Home = () => {
     editedTranscription,
     editedRussian
   ) => {
+    const newData = {
+      english: editedEnglish,
+      transcription: editedTranscription,
+      russian: editedRussian,
+    };
+    //console.log(newData); //проверка показала, что все изменения передаются 
     try {
-      await fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}/update`, {
+      await fetch(`/api/words/${id}/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        }, //сходили в апи, чтобы поменять данные
-        body: JSON.stringify({
-          // JSON.stringify для преобразования данных в формат JSON
-          english: editedEnglish,
-          transcription: editedTranscription,
-          russian: editedRussian,
-        }),
-      });
+        }, 
+        body: JSON.stringify(newData),
+        
+      })
+      
+        //.then((response) => response.json())
+        .then((data) => {
+          console.log("Данные успешно изменены:", data);
+        });
 
       const updatedList = dataServer.map((item) => {
         //в этом случае в updatedList записываем измененные пользоватем данные
@@ -73,6 +78,7 @@ const Home = () => {
           <div className={style.table__russian}>Слово на русском</div>
           <div className={style.table__buttons}></div>
         </div>
+        <AddWord/>
         {dataServer.map((item) => (
           <Line
             key={item.id}
@@ -85,6 +91,7 @@ const Home = () => {
           />
         ))}
       </div>
+      
     </>
   );
 };

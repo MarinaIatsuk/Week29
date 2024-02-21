@@ -43,6 +43,7 @@ const Line = ({
     saveChanges(id, editedEnglish, editedTranscription, editedRussian); //вызов переданной ч/з home ф-ции
   };
 
+
   return (
     <div className={style.table__line}>
       <div className={style.table__number}></div>
