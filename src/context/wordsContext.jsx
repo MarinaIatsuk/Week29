@@ -12,7 +12,7 @@ export function WordsContextComponent({ children }) {
 
   useEffect(() => {
     getWordsServer();
-  }, []);
+  }); //сделала его componentDidUpdate, чтобы обновлялся каждый раз, когда обновляется апи (при добавлении слов, например)
 
   async function getWordsServer() {
     const usersServer = await GET.getWords();

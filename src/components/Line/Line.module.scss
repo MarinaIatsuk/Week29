@@ -1,11 +1,12 @@
 
     .table__line{
         display: grid;
-        grid-template-columns: 0.2fr repeat(4,0.6fr);
+        grid-template-columns: repeat(4,0.6fr);
         align-content: center;
         background: rgba(210, 224, 170, 0.573);
         border: 1px solid #608141bf;
         border-radius: 10px;
+        padding-left: 15px;
         .table__number{
             color: black;
         }

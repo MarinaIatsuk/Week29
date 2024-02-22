@@ -46,7 +46,6 @@ const Line = ({
 
   return (
     <div className={style.table__line}>
-      <div className={style.table__number}></div>
       {isEditing ? (
         //если поле находится в режиме редактирования(пользователь нажал на кнопку и  setIsEditing перешло в true), то отрисовываем инпуты вместо слов
         <>
